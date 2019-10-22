@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book Info</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'app1/style.css' %}">
+</head>
+<body>
+	<h2>Welcome {{user.first}}</h2>
+	<a href="/clear">Log Out</a><br>
+	<div id="left">
+		<h1 id="bookt">{{book.title}}</h1>
+		<p> Added by: {{book.user.first}}</p>
+		<p> Added on: {{book.created_at}}</p>
+		<p> Last updated on {{book.updated_at}}</p>
+		<p>Description </p><p id="description">{{book.desc}}</p>
+		{% if user == book.user %}
+		<form action="/update/{{book.id}}">
+			{% csrf_token %}
+			<input type="submit" value="Update">
+		</form>
+		<form action="/delete/{{book.id}}" method="POST">
+			{% csrf_token %}
+			<input type="submit" value="Delete">
+		</form>
+		{% endif %}
+	</div>
+	<div id="right">
+		<h2>Uses Who Like This Book:</h2>
+		<ul>
+			{% for favorite in favorites %}
+			<li>{{favorite.user.first}} {{favorite.user.last}}</li>
+			{% if favorite.user == user %}
+			<form action="/unfavor/{{book.id}}" method="POST">
+				{% csrf_token %}
+				<input type="submit" value="Unfavorite" id="link">
+			</form>
+			{% endif %}
+			{% endfor %}
+			</ul>
+			
+			{% if not favor %}
+			<form action="/favor/{{book.id}}" method="POST">
+				{% csrf_token %}
+				<input type="submit" value="Add to Favorites" id="link">
+			</form>
+			{% endif %}
+
+		
+	</div>
+</body>
+</html>

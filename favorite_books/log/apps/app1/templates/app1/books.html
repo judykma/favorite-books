@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Favorite Books</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'app1/style.css' %}">
+</head>
+<body>
+	<h2>Welcome {{user.first}}</h2>
+	<a href="/clear">Log Out</a><br>
+	<div id="left">
+		<h2>Add a Favorite Book</h2>
+		{% if messages %}
+		{% for message in messages %}
+			<li>{{message}}</li>
+			{% endfor %}
+			{% endif %}
+		<form action="/edit" method="POST">
+			{% csrf_token %}
+			Title <input type="text" name="title"><br>
+			Description <input type="text" name="desc" id="desc"><br>
+			<input type="submit" value="Add">
+		</form>
+	</div>
+	<div id="right">
+		<h2>All Books</h2><br>
+		{% for book in books %}
+		<a href="/books/{{book.id}}">{{ book.title }}</a>
+		<p>(added by {{book.user.first}}{{book.user.last}})</p>
+		{% if book.user == user %}
+		<span>this is one of your favorites</span><br><br><br>
+		{% else %}
+		<form action="/favor/{{book.id}}" method="POST">
+			{% csrf_token %}
+			<input type="submit" value="Add to Favorites" id="link">
+		</form>
+		<a href="/favor/{{book.id}}" method="POST">Add to Favorites</a><br><br><br>
+		{% endif %}
+		{% endfor %}
+		
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+#registration{
+	display: inline-block;
+	width: 500px;
+}
+
+
+#login{
+	display: inline-block;
+	width: 400px;
+}
+.email{
+	margin-left: 32px;
+}
+.password{
+	margin-left: 10px;
+}
+
+#desc {
+	height: 40px;
+}
+#left {
+	display: inline-block;
+	width: 360px;
+	vertical-align: top;
+}
+#right 	{
+	display: inline-block;
+	width: 400px;
+}
+h2 {
+	display: inline-block;
+	width: 300px;
+}
+span {
+	font-style: italic;
+}
+#bookt {
+	border: 3px solid black;
+}
+#description {
+	border: 3px solid black;
+	height: 120px;
+	width: 200px;
+	display: inline-block;
+}
+form {
+	display: inline-block;
+}
+#link {
+	text-decoration: underline;
+
+}
